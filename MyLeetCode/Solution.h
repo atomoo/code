@@ -30,7 +30,7 @@ public:
 
     vector<vector<int>> findContinuousSequence(int target);
 
-    int diameterOfBinaryTree(TreeNode* root) {};
+    int diameterOfBinaryTree(TreeNode* root);
 };
 
 
@@ -75,7 +75,7 @@ vector<vector<int>> Solution::findContinuousSequence(int target) {
 }
 
 // 543. 二叉树的直径 https://leetcode-cn.com/problems/diameter-of-binary-tree/
-int diameterOfBinaryTree(TreeNode* root) {
+int Solution::diameterOfBinaryTree(TreeNode* root) {
     if (root == NULL) {
         return 0;
     }
