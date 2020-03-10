@@ -1,7 +1,26 @@
 #pragma once
 #include <vector>
+#include <algorithm>
 
 using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+
+int depth(TreeNode* node, int& ans) {
+    if (node == NULL) {
+        return 0;
+    }
+    int leftDepth = depth(node->left, ans);
+    int rightDepth = depth(node->right, ans);
+    ans = max(ans, leftDepth + rightDepth);
+    return max(leftDepth, rightDepth) + 1;
+};
 
 // leetcode
 class Solution {
@@ -10,10 +29,12 @@ public:
     vector<int> distributeCandies(int candies, int num_people);
 
     vector<vector<int>> findContinuousSequence(int target);
+
+    int diameterOfBinaryTree(TreeNode* root) {};
 };
 
 
-// 1103. ·ÖÌÇ¹û II https://leetcode-cn.com/problems/distribute-candies-to-people/
+// 1103. åˆ†ç³–æœ II https://leetcode-cn.com/problems/distribute-candies-to-people/
 vector<int> Solution::distributeCandies(int candies, int num_people) {
     vector<int> result(num_people, 0);
     int current = 0;
@@ -27,7 +48,7 @@ vector<int> Solution::distributeCandies(int candies, int num_people) {
     return result;
 }
 
-// ÃæÊÔÌâ57 - II. ºÍÎªsµÄÁ¬ĞøÕıÊıĞòÁĞ https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/
+// é¢è¯•é¢˜57 - II. å’Œä¸ºsçš„è¿ç»­æ­£æ•°åºåˆ— https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/
 vector<vector<int>> Solution::findContinuousSequence(int target) {
     vector<int> sequence;
     vector<vector<int>> result;
@@ -51,5 +72,15 @@ vector<vector<int>> Solution::findContinuousSequence(int target) {
         }
     }
     return result;
+}
+
+// 543. äºŒå‰æ ‘çš„ç›´å¾„ https://leetcode-cn.com/problems/diameter-of-binary-tree/
+int diameterOfBinaryTree(TreeNode* root) {
+    if (root == NULL) {
+        return 0;
+    }
+    int ans = 0;
+    depth(root, ans);
+    return ans;
 }
 
