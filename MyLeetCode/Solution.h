@@ -31,6 +31,8 @@ public:
     vector<vector<int>> findContinuousSequence(int target);
 
     int diameterOfBinaryTree(TreeNode* root);
+    
+    bool canThreePartsEqualSum(vector<int>& A);
 };
 
 
@@ -82,5 +84,41 @@ int Solution::diameterOfBinaryTree(TreeNode* root) {
     int ans = 0;
     depth(root, ans);
     return ans;
+}
+
+// 1013. 将数组分成和相等的三个部分 https://leetcode-cn.com/problems/partition-array-into-three-parts-with-equal-sum/
+bool Solution::canThreePartsEqualSum(vector<int>& A) {
+    int length = A.size();
+    int sum = 0;
+    for (auto &&i : A)
+    {
+        sum += i;
+    }
+    if (sum % 3 != 0) {
+        return false;
+    }
+    int target = sum / 3;
+    int index = 0;
+    int cur = 0;
+    while (index < length) {
+        cur += A[index];
+        if (cur == target) {
+            break;
+        }
+        index++;
+    }
+    if (cur != target) {
+        return false;
+    }
+    int j = length - 1;
+    cur = 0;
+    while (j > index + 1) {
+        cur += A[j];
+        if (cur == target) {
+            return true;
+        }
+        j--;
+    }
+    return false;
 }
 
