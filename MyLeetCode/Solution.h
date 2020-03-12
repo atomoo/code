@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <algorithm>
+#include <numeric>
 
 using namespace std;
 
@@ -33,6 +34,8 @@ public:
     int diameterOfBinaryTree(TreeNode* root);
     
     bool canThreePartsEqualSum(vector<int>& A);
+
+    string gcdOfStrings(string str1, string str2);
 };
 
 
@@ -120,5 +123,13 @@ bool Solution::canThreePartsEqualSum(vector<int>& A) {
         j--;
     }
     return false;
+}
+
+// 1071. 字符串的最大公因子 https://leetcode-cn.com/problems/greatest-common-divisor-of-strings/
+string Solution::gcdOfStrings(string str1, string str2) {
+    if (str1 + str2 != str2 + str1) {
+        return "";
+    }
+    return str1.substr(0, gcd(str1.length(), str2.length()));
 }
 
