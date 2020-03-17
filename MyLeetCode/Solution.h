@@ -2,6 +2,8 @@
 #include <vector>
 #include <algorithm>
 #include <numeric>
+#include <string>
+#include <unordered_map>
 
 using namespace std;
 
@@ -23,6 +25,16 @@ int depth(TreeNode* node, int& ans) {
     return max(leftDepth, rightDepth) + 1;
 };
 
+// 统计字符串中各个字符的个数
+unordered_map<char, int> countOfCharactor(string S) {
+    unordered_map<char, int> map;
+    for (auto &&i : S)
+    {
+        map[i]++;
+    }
+    return map;
+}
+
 // leetcode
 class Solution {
 public:
@@ -38,6 +50,8 @@ public:
     string gcdOfStrings(string str1, string str2);
     
     string compressString(string S);
+
+    int countCharacters(vector<string>& words, string chars);
 };
 
 
@@ -160,5 +174,32 @@ string Solution::compressString(string S) {
         return replaceResult;
     }
     return S;
+}
+
+// 1160. 拼写单词 https://leetcode-cn.com/problems/find-words-that-can-be-formed-by-characters/
+int Solution::countCharacters(vector<string>& words, string chars) {
+    int result = 0;
+    auto charsMap = countOfCharactor(chars);
+    for (auto &&word : words)
+    {
+        auto len = word.length();
+        if (len <= chars.length()) {
+            auto wordMap = countOfCharactor(word);
+            bool valid = true;
+            for (auto &&wCount : wordMap)
+            {   
+                if (charsMap[wCount.first] < wCount.second) {
+                    valid = false;
+                    break;
+                };
+            }
+            if (valid) {
+                cout << word << endl;
+                result += len;
+            }
+
+        }
+    }
+    return result;
 }
 
