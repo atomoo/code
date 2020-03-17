@@ -36,6 +36,8 @@ public:
     bool canThreePartsEqualSum(vector<int>& A);
 
     string gcdOfStrings(string str1, string str2);
+    
+    string compressString(string S);
 };
 
 
@@ -131,5 +133,32 @@ string Solution::gcdOfStrings(string str1, string str2) {
         return "";
     }
     return str1.substr(0, gcd(str1.length(), str2.length()));
+}
+
+// 面试题 01.06. 字符串压缩 https://leetcode-cn.com/problems/compress-string-lcci/
+string Solution::compressString(string S) {
+    int len = S.length();
+    if (len <= 0) {
+        return S;
+    }
+    int count = 1;
+    char current = S[0];
+    string replaceResult = "";
+    for (int i = 1; i < len; i++)
+    {
+        if (S[i] == current) {
+            count++;
+        }
+        else {
+            replaceResult += current + to_string(count);
+            current = S[i];
+            count = 1;
+        }
+    }
+    replaceResult += current + to_string(count);
+    if (replaceResult.length() < len) {
+        return replaceResult;
+    }
+    return S;
 }
 
