@@ -52,6 +52,8 @@ public:
     string compressString(string S);
 
     int countCharacters(vector<string>& words, string chars);
+    
+    int longestPalindrome(string s);
 };
 
 
@@ -198,6 +200,23 @@ int Solution::countCharacters(vector<string>& words, string chars) {
                 result += len;
             }
 
+        }
+    }
+    return result;
+}
+
+// 409. 最长回文串 https://leetcode-cn.com/problems/longest-palindrome/
+int Solution::longestPalindrome(string s) {
+    if (s.length() < 1) {
+        return 0;
+    }
+    unordered_map map = countOfCharactor(s);
+    int result = 0;
+    for (auto &&item : map) {
+        auto count = item.second;
+        result += count / 2 * 2;
+        if (count % 2 == 1 && result % 2 == 0) {
+            result++;
         }
     }
     return result;
