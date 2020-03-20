@@ -54,6 +54,8 @@ public:
     int countCharacters(vector<string>& words, string chars);
     
     int longestPalindrome(string s);
+    
+    vector<int> getLeastNumbers(vector<int>& arr, int k);
 };
 
 
@@ -218,6 +220,16 @@ int Solution::longestPalindrome(string s) {
         if (count % 2 == 1 && result % 2 == 0) {
             result++;
         }
+    }
+    return result;
+}
+
+// 面试题40. 最小的k个数 https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/
+vector<int> Solution::getLeastNumbers(vector<int>& arr, int k) {
+    sort(arr.begin(), arr.end());
+    vector<int> result(k, 0);
+    for (int i = 0; i < k; i++) {
+        result[i] = arr[i];
     }
     return result;
 }
