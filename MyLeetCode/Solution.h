@@ -14,6 +14,12 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
 
 int depth(TreeNode* node, int& ans) {
     if (node == NULL) {
@@ -56,10 +62,12 @@ public:
     int longestPalindrome(string s);
     
     vector<int> getLeastNumbers(vector<int>& arr, int k);
+    
+    ListNode* middleNode(ListNode* head);
 };
 
 
-// 1103. 分糖果 II https://leetcode-cn.com/problems/distribute-candies-to-people/
+// 1103. 分糖果 II https://;-cn.com/problems/distribute-candies-to-people/
 vector<int> Solution::distributeCandies(int candies, int num_people) {
     vector<int> result(num_people, 0);
     int current = 0;
@@ -232,5 +240,24 @@ vector<int> Solution::getLeastNumbers(vector<int>& arr, int k) {
         result[i] = arr[i];
     }
     return result;
+}
+
+// 876. 链表的中间结点 https://leetcode-cn.com/problems/middle-of-the-linked-list/
+ListNode* Solution::middleNode(ListNode* head) {
+    int len = 0;
+    ListNode* cur = head;
+    while (cur != nullptr)
+    {
+        len++;
+        cur = cur->next;
+    }
+    int index = 0;
+    cur = head;
+    while (index < len / 2)
+    {
+        index++;
+        cur = cur->next;
+    }
+    return cur;
 }
 
